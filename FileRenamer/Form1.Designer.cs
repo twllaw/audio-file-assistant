@@ -180,7 +180,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(label1);
             this.Name = "Form1";
-            this.Text = "File Renamer";
+            this.Text = "Music File Renamer";
             this.ResumeLayout(false);
             this.PerformLayout();
 
