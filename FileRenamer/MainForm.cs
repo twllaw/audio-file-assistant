@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace MyProjects
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
 
-        private void btnProcess_Click(object sender, EventArgs e)
+        private void BtnProcess_Click(object sender, EventArgs e)
         {
             lblResult.Visible = false;
             RenameResult res = new RenameResult();
@@ -84,7 +84,7 @@ namespace MyProjects
             return renameResult;
         }
 
-        private void chbxRemove_CheckedChanged(object sender, EventArgs e)
+        private void ChbxRemove_CheckedChanged(object sender, EventArgs e)
         {
             if (chbxRemove.Checked)
                 txtBxReplacementStr.Enabled = true;
@@ -95,7 +95,7 @@ namespace MyProjects
             }
         }
 
-        private void btnBrowse_Click(object sender, EventArgs e)
+        private void BtnBrowse_Click(object sender, EventArgs e)
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -103,7 +103,7 @@ namespace MyProjects
             }
         }
 
-        private void chkbxShorten_CheckedChanged(object sender, EventArgs e)
+        private void ChkbxShorten_CheckedChanged(object sender, EventArgs e)
         {
             HideOrShowHitButton();
             txtBxToDelete.Enabled = chkbxShorten.Checked;
@@ -115,12 +115,12 @@ namespace MyProjects
             }
         }
 
-        private void chkbxAddTrackNo_CheckedChanged(object sender, EventArgs e)
+        private void ChkbxAddTrackNo_CheckedChanged(object sender, EventArgs e)
         {
             HideOrShowHitButton();
         }
 
-        private void txtBxToDelete_TextChanged(object sender, EventArgs e)
+        private void TxtBxToDelete_TextChanged(object sender, EventArgs e)
         {
             HideOrShowHitButton();
         }

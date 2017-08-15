@@ -1,22 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyProjects
+﻿namespace MyProjects
 {
-    class Files
-    {
-        private string _fileName;
-
-        public string FileName
-        {
-            get { return _fileName; }
-            set { _fileName = value; }
-        }
-    }
-
     internal struct RenameResult
     {
         private bool _success;
