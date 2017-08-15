@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioFileAssistant", "FileRenamer\AudioFileAssistant.csproj", "{0A326B55-01D8-426C-9ED3-3896980CD0E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioFileAssistant", "AudioFileAssistant\AudioFileAssistant.csproj", "{0A326B55-01D8-426C-9ED3-3896980CD0E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
