@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using AudioFileAssistant.Models;
 
-namespace MyProjects
+namespace AudioFileAssistant.Helpers
 {
-    static class FileOperations
+    public static class FileHelper
     {
+        public static readonly string[] ValidAudioFileExtensions = { ".mp3", ".flac", ".wav" };
+
         internal static RenameResult RemoveStringsWithinFileNames(string directory, string toRemove, string replacementStr = "")
         {
             bool validFilesExist = false;
@@ -39,7 +38,7 @@ namespace MyProjects
 
                 return result;
             }
-            catch (System.IO.DirectoryNotFoundException)
+            catch (DirectoryNotFoundException)
             {
                 RenameResult result = new RenameResult
                 {

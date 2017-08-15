@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using AudioFileAssistant.Models;
+using AudioFileAssistant.Helpers;
 
-namespace MyProjects
+namespace AudioFileAssistant
 {
     public partial class MainForm : Form
     {
@@ -71,7 +66,7 @@ namespace MyProjects
         private RenameResult RemoveStringsWithinFileNames()
         {
             RenameResult renameResult = 
-                FileOperations.RemoveStringsWithinFileNames(txtBxDirectory.Text, txtBxToDelete.Text, txtBxReplacementStr.Text);
+                FileHelper.RemoveStringsWithinFileNames(txtBxDirectory.Text, txtBxToDelete.Text, txtBxReplacementStr.Text);
 
             return renameResult;
         }
@@ -79,7 +74,7 @@ namespace MyProjects
         private RenameResult AddTrackNumsToFileNames()
         {
             RenameResult renameResult =
-                FileOperations.AddTrackNumsToFileNames(txtBxDirectory.Text);
+                FileHelper.AddTrackNumsToFileNames(txtBxDirectory.Text);
 
             return renameResult;
         }
@@ -132,6 +127,38 @@ namespace MyProjects
                 (chkbxAddTrackNo.Checked))
             {
                 btnProcess.Enabled = true;
+            }
+        }
+
+        private void BtnCopyTags_Click(object sender, EventArgs e)
+        {
+            var sourcePath = TxtbxSourceFolder.Text;
+            var targetPath = TxtbxTargetFolder.Text;
+
+            if (!DirectoryHelper.IsValidDirectory(sourcePath) || !DirectoryHelper.IsValidDirectory(targetPath))
+            {
+                LblInfo.Text = "You need to enter a valid path for both folders";
+                return;
+            }
+
+            var filteredSourceFiles = DirectoryHelper.GetAudioFiles(sourcePath);
+            var filteredTargetFiles = DirectoryHelper.GetAudioFiles(targetPath);
+
+            if (filteredSourceFiles.Count != filteredTargetFiles.Count)
+            {
+                LblInfo.Text = "Both folders must have the same amount of audio files";
+                return;
+            }
+
+            try
+            {
+                DirectoryHelper.CopyAudioTags(filteredSourceFiles, filteredTargetFiles);
+                MessageBox.Show("Finished!");
+            }
+            catch (Exception ex)
+            {
+                LblInfo.Text = $"Oh dear, something went wrong: {ex.Message}";
+                return;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace MyProjects
+﻿namespace AudioFileAssistant.Models
 {
     internal struct RenameResult
     {

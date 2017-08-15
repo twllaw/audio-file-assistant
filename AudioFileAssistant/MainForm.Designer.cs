@@ -1,4 +1,4 @@
-﻿namespace MyProjects
+﻿namespace AudioFileAssistant
 {
     partial class MainForm
     {
@@ -45,11 +45,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label4 = new System.Windows.Forms.Label();
+            this.LblInfo = new System.Windows.Forms.Label();
+            this.BtnCopyTags = new System.Windows.Forms.Button();
+            this.TxtbxTargetFolder = new System.Windows.Forms.TextBox();
+            this.TxtbxSourceFolder = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             LblTagCopier = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
@@ -191,7 +192,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.SelectedIndex = 1;
             this.tabControl1.Size = new System.Drawing.Size(501, 345);
             this.tabControl1.TabIndex = 10;
             // 
@@ -219,9 +220,10 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.textBox2);
-            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.LblInfo);
+            this.tabPage2.Controls.Add(this.BtnCopyTags);
+            this.tabPage2.Controls.Add(this.TxtbxTargetFolder);
+            this.tabPage2.Controls.Add(this.TxtbxSourceFolder);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(LblTagCopier);
@@ -233,14 +235,39 @@
             this.tabPage2.Text = "Tag Copier";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // LblInfo
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(73, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Source Folder";
+            this.LblInfo.AutoSize = true;
+            this.LblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblInfo.Location = new System.Drawing.Point(10, 227);
+            this.LblInfo.Name = "LblInfo";
+            this.LblInfo.Size = new System.Drawing.Size(112, 13);
+            this.LblInfo.TabIndex = 7;
+            this.LblInfo.Text = "Be careful though!";
+            // 
+            // BtnCopyTags
+            // 
+            this.BtnCopyTags.Location = new System.Drawing.Point(13, 181);
+            this.BtnCopyTags.Name = "BtnCopyTags";
+            this.BtnCopyTags.Size = new System.Drawing.Size(105, 23);
+            this.BtnCopyTags.TabIndex = 2;
+            this.BtnCopyTags.Text = "Copy dem tags!";
+            this.BtnCopyTags.UseVisualStyleBackColor = true;
+            this.BtnCopyTags.Click += new System.EventHandler(this.BtnCopyTags_Click);
+            // 
+            // TxtbxTargetFolder
+            // 
+            this.TxtbxTargetFolder.Location = new System.Drawing.Point(13, 131);
+            this.TxtbxTargetFolder.Name = "TxtbxTargetFolder";
+            this.TxtbxTargetFolder.Size = new System.Drawing.Size(335, 20);
+            this.TxtbxTargetFolder.TabIndex = 1;
+            // 
+            // TxtbxSourceFolder
+            // 
+            this.TxtbxSourceFolder.Location = new System.Drawing.Point(13, 70);
+            this.TxtbxSourceFolder.Name = "TxtbxSourceFolder";
+            this.TxtbxSourceFolder.Size = new System.Drawing.Size(335, 20);
+            this.TxtbxSourceFolder.TabIndex = 0;
             // 
             // label5
             // 
@@ -251,28 +278,14 @@
             this.label5.TabIndex = 3;
             this.label5.Text = "Target Folder";
             // 
-            // textBox1
+            // label4
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 70);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(335, 20);
-            this.textBox1.TabIndex = 4;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(13, 131);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(335, 20);
-            this.textBox2.TabIndex = 5;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(13, 181);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Copy dem tags!";
-            this.button1.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 53);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(73, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Source Folder";
             // 
             // MainForm
             // 
@@ -308,10 +321,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button BtnCopyTags;
+        private System.Windows.Forms.TextBox TxtbxTargetFolder;
+        private System.Windows.Forms.TextBox TxtbxSourceFolder;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label LblInfo;
     }
 }
