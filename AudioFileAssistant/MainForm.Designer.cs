@@ -51,6 +51,7 @@
             this.TxtbxSourceFolder = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             LblTagCopier = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
@@ -220,6 +221,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.LblInfo);
             this.tabPage2.Controls.Add(this.BtnCopyTags);
             this.tabPage2.Controls.Add(this.TxtbxTargetFolder);
@@ -239,19 +241,19 @@
             // 
             this.LblInfo.AutoSize = true;
             this.LblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LblInfo.Location = new System.Drawing.Point(10, 227);
+            this.LblInfo.ForeColor = System.Drawing.Color.Red;
+            this.LblInfo.Location = new System.Drawing.Point(10, 259);
             this.LblInfo.Name = "LblInfo";
-            this.LblInfo.Size = new System.Drawing.Size(112, 13);
+            this.LblInfo.Size = new System.Drawing.Size(0, 13);
             this.LblInfo.TabIndex = 7;
-            this.LblInfo.Text = "Be careful though!";
             // 
             // BtnCopyTags
             // 
-            this.BtnCopyTags.Location = new System.Drawing.Point(13, 181);
+            this.BtnCopyTags.Location = new System.Drawing.Point(13, 212);
             this.BtnCopyTags.Name = "BtnCopyTags";
             this.BtnCopyTags.Size = new System.Drawing.Size(105, 23);
             this.BtnCopyTags.TabIndex = 2;
-            this.BtnCopyTags.Text = "Copy dem tags!";
+            this.BtnCopyTags.Text = "Copy tags!";
             this.BtnCopyTags.UseVisualStyleBackColor = true;
             this.BtnCopyTags.Click += new System.EventHandler(this.BtnCopyTags_Click);
             // 
@@ -286,6 +288,16 @@
             this.label4.Size = new System.Drawing.Size(73, 13);
             this.label4.TabIndex = 2;
             this.label4.Text = "Source Folder";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(10, 176);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(292, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Ensure that both folders have the right audio files!";
             // 
             // MainForm
             // 
@@ -327,5 +339,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label LblInfo;
+        private System.Windows.Forms.Label label6;
     }
 }

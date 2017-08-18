@@ -38,28 +38,11 @@ namespace AudioFileAssistant.Helpers
             foreach (var file in sourceFilesWithTags)
             {
                 var target = targetFilesWithTags.Skip(skipCounter).FirstOrDefault();
-                var tags = GetTags(target);
-
-                CopyTags(file.Tag, ref tags);
+                file.Tag.CopyTo(GetTags(target), true);
                 target.Save();
 
                 skipCounter++;
             }
-        }
-
-        private static void CopyTags(Tag sourceTags, ref Tag targetTags)
-        {
-            targetTags.AlbumArtists = sourceTags.AlbumArtists;
-            targetTags.Album = sourceTags.Album;
-            targetTags.Track = sourceTags.Track;
-            targetTags.Year = sourceTags.Year;
-            targetTags.Title = sourceTags.Title;
-            targetTags.Performers = sourceTags.Performers;
-            targetTags.Composers = sourceTags.Composers;
-            targetTags.Genres = sourceTags.Genres;
-            targetTags.Conductor = sourceTags.Conductor;
-            targetTags.Disc = sourceTags.Disc;
-            targetTags.Comment = sourceTags.Comment;
         }
 
         private static Tag GetTags(TagLib.File target)

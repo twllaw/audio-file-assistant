@@ -153,7 +153,8 @@ namespace AudioFileAssistant
             try
             {
                 DirectoryHelper.CopyAudioTags(filteredSourceFiles, filteredTargetFiles);
-                MessageBox.Show("Finished!");
+                MessageBox.Show("Finished copying tags!", "Info");
+                LblInfo.Text = string.Empty;
             }
             catch (Exception ex)
             {
