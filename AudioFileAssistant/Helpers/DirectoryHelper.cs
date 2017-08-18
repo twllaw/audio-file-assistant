@@ -1,9 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
-using AudioFileAssistant.Models;
 using TagLib;
 using System.Collections.Generic;
-using System;
 
 namespace AudioFileAssistant.Helpers
 {
@@ -18,7 +16,7 @@ namespace AudioFileAssistant.Helpers
             return true;
         }
 
-        public static List<string> GetAudioFiles(string folderPath)
+        public static List<string> GetAudioFilePaths(string folderPath)
         {
             var files = Directory.GetFiles(folderPath)
                 .Where(file => FileHelper.ValidAudioFileExtensions.Contains((new FileInfo(file)).Extension.ToLower()));
@@ -26,18 +24,18 @@ namespace AudioFileAssistant.Helpers
             return files.ToList();
         }
 
-        public static void CopyAudioTags(List<string> sourceFiles, List<string> targetFiles)
+        public static void CopyAudioTags(List<string> sourceFilePaths, List<string> targetFilePaths)
         {
-            var sourceFilesWithTags = sourceFiles.Select(file => TagLib.File.Create(file));
-            sourceFilesWithTags.OrderBy(file => file.Tag.Track);
-            var targetFilesWithTags = targetFiles.Select(file => TagLib.File.Create(file));
-            targetFilesWithTags.OrderBy(file => file.Tag.Track);
+            var sourceFiles = sourceFilePaths.Select(file => TagLib.File.Create(file));
+            sourceFiles.OrderBy(file => file.Tag.Track);
+            var targetFiles = targetFilePaths.Select(file => TagLib.File.Create(file));
+            targetFiles.OrderBy(file => file.Tag.Track);
 
             var skipCounter = 0;
 
-            foreach (var file in sourceFilesWithTags)
+            foreach (var file in sourceFiles)
             {
-                var target = targetFilesWithTags.Skip(skipCounter).FirstOrDefault();
+                var target = targetFiles.Skip(skipCounter).FirstOrDefault();
                 file.Tag.CopyTo(GetTags(target), true);
                 target.Save();
 

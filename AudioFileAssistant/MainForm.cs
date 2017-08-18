@@ -141,10 +141,10 @@ namespace AudioFileAssistant
                 return;
             }
 
-            var filteredSourceFiles = DirectoryHelper.GetAudioFiles(sourcePath);
-            var filteredTargetFiles = DirectoryHelper.GetAudioFiles(targetPath);
+            var filteredSourceFilePaths = DirectoryHelper.GetAudioFilePaths(sourcePath);
+            var filteredTargetFilePaths = DirectoryHelper.GetAudioFilePaths(targetPath);
 
-            if (filteredSourceFiles.Count != filteredTargetFiles.Count)
+            if (filteredSourceFilePaths.Count != filteredTargetFilePaths.Count)
             {
                 LblInfo.Text = "Both folders must have the same amount of audio files";
                 return;
@@ -152,7 +152,7 @@ namespace AudioFileAssistant
 
             try
             {
-                DirectoryHelper.CopyAudioTags(filteredSourceFiles, filteredTargetFiles);
+                DirectoryHelper.CopyAudioTags(filteredSourceFilePaths, filteredTargetFilePaths);
                 MessageBox.Show("Finished copying tags!", "Info");
                 LblInfo.Text = string.Empty;
             }
