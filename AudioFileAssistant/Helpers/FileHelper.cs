@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using AudioFileAssistant.Models;
+using System.Linq;
 
 namespace AudioFileAssistant.Helpers
 {
@@ -10,51 +11,79 @@ namespace AudioFileAssistant.Helpers
 
         internal static RenameResult RemoveStringsWithinFileNames(string directory, string toRemove, string replacementStr = "")
         {
-            bool validFilesExist = false;
-
             try
             {
-                DirectoryInfo d = new DirectoryInfo(@directory);
-                FileInfo[] infos = d.GetFiles();
-                foreach (FileInfo f in infos)
+                var fileInfoList = (new DirectoryInfo(@directory)).GetFiles();
+                var matchingFilesExist = fileInfoList != null && fileInfoList.Any(f => f.Name.Contains(toRemove));
+
+                foreach (var fileInfo in fileInfoList)
                 {
-                    if (f.Name.Contains(toRemove))
+                    Console.WriteLine($"Current file is {fileInfo.Name}");
+
+                    if (string.IsNullOrEmpty(toRemove))
                     {
-                        validFilesExist = true;
-                        RenameIndividualFile(f, toRemove, replacementStr);
+                        RenameIndividualFile(fileInfo, GetPreTrackNumberString(fileInfo.FullName, fileInfo.Name, fileInfo.Extension), 
+                            replacementStr);
+                    }
+                    else if (fileInfo.Name.Contains(toRemove))
+                    {
+                        RenameIndividualFile(fileInfo, toRemove, replacementStr);
                     }
                 }
-                RenameResult result = new RenameResult
+
+                if (!string.IsNullOrEmpty(toRemove) && !matchingFilesExist)
+                {
+                    return new RenameResult
+                    {
+                        Success = false,
+                        Message = "No files were found to have file names that has that string, dude"
+                    };
+                }
+
+                return new RenameResult
                 {
                     Success = true,
                     Message = "Success!(?) Go check the files..."
                 };
-
-                if (!validFilesExist)
-                {
-                    result.Success = false;
-                    result.Message = "No files were found to have file names that has that string, dude";
-                }
-
-                return result;
             }
             catch (DirectoryNotFoundException)
             {
-                RenameResult result = new RenameResult
+                return new RenameResult
                 {
                     Success = false,
                     Message = "ERROR: Dude, are you sure this is the right folder?"
                 };
-                return result;
             }
             catch (Exception e)
             {
-                RenameResult result = new RenameResult
+                return new RenameResult
                 {
                     Success = false,
-                    Message = "ERROR: Ugh, something went wrong - {0}" + e.Message
+                    Message = $"ERROR: Ugh, something went wrong - {e.Message}" 
                 };
-                return result;
+            }
+        }
+
+        private static string GetPreTrackNumberString(string filePath, string fileName, string fileExtension)
+        {
+            try
+            {
+                if (!ValidAudioFileExtensions.Contains(fileExtension.ToLower()))
+                {
+                    return string.Empty;
+                }
+
+                var trackNumber = TagLib.File.Create(filePath).Tag.Track.ToString();
+                if (trackNumber.Length == 1)
+                {
+                    trackNumber = $"0{trackNumber}";
+                }
+
+                return fileName.Split(new string[] { trackNumber }, StringSplitOptions.None).FirstOrDefault();
+            }
+            catch
+            {
+                return string.Empty;
             }
         }
 
@@ -112,10 +141,13 @@ namespace AudioFileAssistant.Helpers
 
         private static void RenameIndividualFile(FileInfo f, string toBeReplacedStr, string replacementStr)
         {
-            string newFileName, oldFileName;
+            if (string.IsNullOrEmpty(toBeReplacedStr))
+            {
+                return;
+            }
 
-            oldFileName = f.Name;
-            newFileName = f.Name.Replace(toBeReplacedStr, replacementStr);
+            var oldFileName = f.Name;
+            var newFileName = f.Name.Replace(toBeReplacedStr, replacementStr);
             File.Move(f.FullName, f.FullName.ToString().Replace(oldFileName, newFileName));
         }
     }
