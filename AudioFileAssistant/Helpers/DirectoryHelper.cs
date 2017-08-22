@@ -26,10 +26,10 @@ namespace AudioFileAssistant.Helpers
 
         public static void CopyAudioTags(List<string> sourceFilePaths, List<string> targetFilePaths)
         {
-            var sourceFiles = sourceFilePaths.Select(file => TagLib.File.Create(file));
-            sourceFiles.OrderBy(file => file.Tag.Track);
-            var targetFiles = targetFilePaths.Select(file => TagLib.File.Create(file));
-            targetFiles.OrderBy(file => file.Tag.Track);
+            var sourceFiles = sourceFilePaths.Select(file => TagLib.File.Create(file))
+                .OrderBy(file => file.Tag.Track).ToList();
+            var targetFiles = targetFilePaths.Select(file => TagLib.File.Create(file))
+                .OrderBy(file => file.Tag.Track).ToList();
 
             var skipCounter = 0;
 
