@@ -108,6 +108,7 @@ namespace AudioFileAssistant
 
             try
             {
+                LblInfo.Text = "Processing...";
                 DirectoryHelper.CopyAudioTags(filteredSourceFilePaths, filteredTargetFilePaths);
                 MessageBox.Show("Finished copying tags!", "Info");
                 LblInfo.Text = string.Empty;
