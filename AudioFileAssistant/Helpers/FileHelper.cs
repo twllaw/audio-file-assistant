@@ -7,7 +7,7 @@ namespace AudioFileAssistant.Helpers
 {
     public static class FileHelper
     {
-        public static readonly string[] ValidAudioFileExtensions = { ".mp3", ".flac", ".wav" };
+        public static readonly string[] ValidAudioFileExtensions = { ".mp3", ".flac", ".wav", ".m4a" };
 
         internal static RenameResult RemoveStringsWithinFileNames(string directory, string toRemove, string replacementStr = "")
         {
