@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Linq;
 using AudioFileAssistant.Models;
 using AudioFileAssistant.Helpers;
 
@@ -7,6 +9,9 @@ namespace AudioFileAssistant
 {
     public partial class MainForm : Form
     {
+        Color WarningColour = Color.Red;
+        Color SuccessColour = Color.RoyalBlue;
+
         public MainForm()
         {
             InitializeComponent();
@@ -14,7 +19,7 @@ namespace AudioFileAssistant
 
         private void BtnProcess_Click(object sender, EventArgs e)
         {
-            lblResult.Visible = false;
+            lblResult.ForeColor = WarningColour;
             var result = new RenameResult();
 
             if (!string.IsNullOrEmpty(txtBxDirectory.Text))
@@ -26,7 +31,6 @@ namespace AudioFileAssistant
 
                     if (!result.Success)
                     {
-                        lblResult.Visible = true;
                         lblResult.Text = result.Message;
                         return;
                     }
@@ -39,20 +43,18 @@ namespace AudioFileAssistant
 
                     if (!result.Success)
                     {
-                        lblResult.Visible = true;
                         lblResult.Text = result.Message;
-
                         return;
                     }
                 }
                 if (result.Success)
                 {
-                    MessageBox.Show("Files were successfully renamed!");
+                    lblResult.Text = "Files were successfully renamed!";
+                    lblResult.ForeColor = SuccessColour;
                 }     
             }
             else
             {
-                lblResult.Visible = true;
                 lblResult.Text = "Please select directory";
             }
         }
@@ -88,6 +90,9 @@ namespace AudioFileAssistant
 
         private void BtnCopyTags_Click(object sender, EventArgs e)
         {
+            LblInfo.Text = "Processing...";
+            LblInfo.ForeColor = WarningColour;
+
             var sourcePath = TxtbxSourceFolder.Text;
             var targetPath = TxtbxTargetFolder.Text;
 
@@ -108,10 +113,17 @@ namespace AudioFileAssistant
 
             try
             {
-                LblInfo.Text = "Processing...";
                 DirectoryHelper.CopyAudioTags(filteredSourceFilePaths, filteredTargetFilePaths);
-                MessageBox.Show("Finished copying tags!", "Info");
-                LblInfo.Text = string.Empty;
+
+                LblInfo.ForeColor = SuccessColour;
+                LblInfo.Text = $"Tags copied for {targetPath.Split('\\').LastOrDefault()}!";
+
+                if (ChbxClearFields.Checked)
+                {
+                    TxtbxSourceFolder.Clear();
+                    TxtbxTargetFolder.Clear();
+                    TxtbxSourceFolder.Focus();
+                }
             }
             catch (Exception ex)
             {

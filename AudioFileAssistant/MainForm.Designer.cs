@@ -52,6 +52,7 @@
             this.TxtbxSourceFolder = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.ChbxClearFields = new System.Windows.Forms.CheckBox();
             label1 = new System.Windows.Forms.Label();
             LblTagCopier = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
@@ -127,10 +128,8 @@
             this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResult.Location = new System.Drawing.Point(6, 293);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(55, 13);
+            this.lblResult.Size = new System.Drawing.Size(0, 13);
             this.lblResult.TabIndex = 5;
-            this.lblResult.Text = "ERROR:";
-            this.lblResult.Visible = false;
             // 
             // chbxRemove
             // 
@@ -218,6 +217,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.ChbxClearFields);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.LblInfo);
             this.tabPage2.Controls.Add(this.BtnCopyTags);
@@ -296,6 +296,18 @@
             this.label4.TabIndex = 2;
             this.label4.Text = "Source Folder";
             // 
+            // ChbxClearFields
+            // 
+            this.ChbxClearFields.AutoSize = true;
+            this.ChbxClearFields.Checked = true;
+            this.ChbxClearFields.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChbxClearFields.Location = new System.Drawing.Point(140, 216);
+            this.ChbxClearFields.Name = "ChbxClearFields";
+            this.ChbxClearFields.Size = new System.Drawing.Size(141, 17);
+            this.ChbxClearFields.TabIndex = 9;
+            this.ChbxClearFields.Text = "Clear fields after copying";
+            this.ChbxClearFields.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -337,5 +349,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label LblInfo;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox ChbxClearFields;
     }
 }
