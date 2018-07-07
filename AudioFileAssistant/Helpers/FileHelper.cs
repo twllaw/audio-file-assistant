@@ -98,7 +98,7 @@ namespace AudioFileAssistant.Helpers
                 FileInfo[] infos = d.GetFiles();
                 foreach (FileInfo f in infos)
                 {
-                    if (f.Extension == ".mp3")
+                    if (ValidAudioFileExtensions.Contains(f.Extension))
                     {
                         validFilesExist = true;
                         tagFile = TagLib.File.Create(@directory + "\\" + f.Name);
