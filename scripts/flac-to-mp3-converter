@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Convert FLAC files in folder to MP3 files
+
+SAVEIFS=$IFS
+IFS=$(echo -en "\n\b")
+for file in *flac
+do
+  echo "File Name: ${file%.*}"
+  ffmpeg -i $file -b:a 320k "${file%.*}.mp3"
+done
+IFS=$SAVEIFS
